@@ -1,0 +1,24 @@
+{
+  "name": "javascript dev",
+  "version": "0.0.1",
+  "authors": [
+    "Kotaro Chiba <kochmusica@gmail.com>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "ui": "~0.0.5",
+    "jquery-ui": "jqueryui#~1.11.4"
+  }
+}

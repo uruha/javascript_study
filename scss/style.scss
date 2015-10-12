@@ -1,0 +1,100 @@
+@import 'compass/reset';
+@import 'compass';
+
+$black: #24140e;
+$white: #ffffff;
+$gray: #bcbace;
+$red: #ea5550;
+$blue: #26499d;
+$yellow: #fcc800;
+$green: #00a497;
+
+@mixin font-awesome {
+	font-size: 'font-awesome';
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Monaco, arial, sans-serif;
+}
+
+.clear {
+	@include pie-clearfix;
+}
+
+// ドラッグとドロップをする場所のスタイル
+.contents {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	.module__space {
+		display: table-cell;
+		width: 50%;
+		height: 100%;
+		padding: 14px;
+		background-color: $gray;
+		.module__inner {
+			height: 100%;
+			background-color: darken($gray, 10%);
+		}
+	}
+	.build__space {
+		display: table-cell;
+		width: 50%;
+		height: 100%;
+		padding: 14px;
+		background-color: lighten($gray, 10%);
+		.build__inner {
+			height: 100%;
+			background-color: $white;
+		}
+	}
+}
+
+// moduleの基本スタイル
+.module {
+	position: relative;
+	height: 80px;
+	.module-txt {
+		color: $white;
+		padding: 4px;
+	}
+	// 各moduleの色設定
+  &.md_01 {
+    background-color: $red;
+  }
+  &.md_02 {
+    background-color: $blue;
+  }
+  &.md_03 {
+    background-color: $green;
+  }
+  // moduleがbuild__innerに移動してきたら
+  &.droped {
+  	.fa-close {
+  		position: absolute;
+  		top: 0;
+  		right: 0;
+  		color: $white;
+  		padding: 4px;
+  		@include opacity(0);
+  		@include transition(.3s);
+  	}
+  	&:hover {
+  		.fa-close {
+  			@include opacity(1.0);
+  			&:hover {
+  				color: $yellow;
+  			}
+  		}
+  	}
+  }
+}
+
+// placehoslderは常に非表示
+.ui-sortable-placeholder {
+  display: none;
+}
