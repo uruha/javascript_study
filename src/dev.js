@@ -11,8 +11,8 @@ var $module = $('.module');
 function sizeAppend() {
   var Height = $window.height();
   var mdWidth = $moduleSp.width();
-  $contents.css('height', Height);
-  $module.css('width', mdWidth);
+  $contents.css('height', Height / 2 + 'px');
+  $module.css('width', mdWidth + 'px');
 }
 
 $document.on('ready', () => sizeAppend() );
@@ -27,8 +27,10 @@ $module.draggable({
 });
 
 $sortSp.droppable({
-  accept: $module,
-  deactivate: function(e, ui) {
+  accept: $module
+});
+
+$sortSp.on('dropdeactivate', (e, ui) => {
     var $dropModule = ui.helper;
 
     $dropModule.addClass('droped');
@@ -40,14 +42,121 @@ $sortSp.droppable({
         $dropModule.remove();
       });
     });
-
-  }
 });
 
 $sortSp.sortable({
   // containment: $sortSp,
   opacity: 0.7,
   scroll: false
+});
+
+/* validation study (ES6)
+================================= */
+class ValidateModel {
+  // observer
+  constructor(attrs) {
+    this.val = '';
+    this.attrs = {
+      required: attrs.required || false,
+      maxlength: attrs.maxlength || 8,
+      minlength: attrs.minlength || 4
+    };
+    this.listeners = {
+      valid: [],
+      invalid: []
+    };
+  }
+  // compare argument val and this.val
+  set(val) {
+    // no chnage => return
+    if(this.val === val ) return;
+    // changed => it substitutes arg val to this.val
+    this.val = val;
+    this.validate();
+  }
+  validate() {
+    var val;
+    this.errors =[];
+
+    for ( var key in this.attrs) {
+      val = this.attrs[key];
+      if (val && !this[key](val)) this.errors.push(key);
+    }
+    this.trigger(!this.errors.length ? 'valid' : 'invalid');
+  }
+  // add listeners to event funciton
+  on(event, func) {
+    this.listeners[event].push(func);
+  }
+  // iterative prossesing foreach listeners
+  trigger(event) {
+    $.each(this.listeners[event], function () {
+      this();
+    });
+  }
+  // determines whether this.val and null
+  required() {
+    return this.val !== '';
+  }
+  maxlength(num) {
+    return num >= this.val.length;
+  }
+  minlength(num) {
+    return num <= this.val.length;
+  }
+}
+
+class ValidateView {
+  constructor(el) {
+    this.initialize(el);
+    this.handleEvents();
+  }
+  initialize(el) {
+    this.$el = $(el);
+    this.$list = this.$el.next().children();
+
+    var obj = this.$el.data();
+
+    if (this.$el.prop('required')) {
+      obj['required'] = true;
+    }
+    this.model = new ValidateModel(obj);
+  }
+  handleEvents() {
+    var self = this;
+
+    this.$el.on('keyup', (e) => {
+      self.onKeyup(e);
+    });
+
+    this.model.on('invalid', () => {
+      self.onValid();
+    });
+    this.model.on('invalid', () => {
+      self.onInvalid();
+    });
+  }
+  onKeyup(e) {
+    var $target = $(e.currentTarget);
+    this.model.set($target.val());
+  }
+  onValid() {
+    this.$el.removeClass('error');
+    this.$list.hide();
+  }
+  onInvalid() {
+    var self = this;
+    this.$el.addClass('error');
+    this.$list.hide();
+
+    $.each(this.model.errors, (index, val) => {
+      self.$list.filter('[data-error=\'' + val + '\']').show();
+    });
+  }
+}
+
+$('input').each(() => {
+  new ValidateView('input');
 });
 
 
@@ -156,7 +265,17 @@ console.log(tama.cry);
 tama.yourName();
 tama.bark();
 
+// each forEach
+$(() => {
+  var arr = [1,2,3,4,5];
+  $.each(arr, () => {
+    console.log(this);
+  });
 
+  arr.forEach((val) => {
+    console.log(this);
+  });
+});
 
 
 /* ES6

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
+  <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="./css/style.css">
   <title>Development</title>
 </head>
 <body>
 
+<h2 class="study-title">jQuery UI drop &amp; drop</h2>
 <div class="contents">
 	<div class="module__space">
 		<div class="module__inner">
@@ -25,6 +29,38 @@
 	<div class="build__space">
 		<div class="build__inner"></div>
 	</div>
+</div>
+
+<h2 class="study-title">validation</h2>
+<div class="validation">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--3-col">
+      <label class="form-title" for="">Account</label>
+    </div>
+    <div class="mdl-cell mdl-cell--9-cal mdl-textfield mdl-js-textfield">
+      <input class="mdl-textfield__input" type="text" placeholder="4文字以上8文字以内で入力して下さい" data-minlength="4" data-maxlength="8" required>
+      <ul class="error-action">
+        <li data-error="required">必須項目です</li>
+        <li data-error="minlength">4文字以上で入力してください</li>
+        <li data-error="maxlength">8文字以下で入力してください</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--3-col">
+      <label class="form-title" for="">Password</label>
+    </div>
+    <div class="mdl-cell mdl-cell--9-cal mdl-textfield mdl-js-textfield">
+      <input class="mdl-textfield__input" type="text" placeholder="4文字以上8文字以内で入力して下さい" data-minlength="4" data-maxlength="8" required>
+      <ul class="error-action">
+        <li data-error="required">必須項目です</li>
+        <li data-error="minlength">4文字以上で入力してください</li>
+        <li data-error="maxlength">8文字以下で入力してください</li>
+      </ul>
+    </div>
+
+  </div>
 </div>
 
 

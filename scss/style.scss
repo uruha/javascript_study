@@ -25,7 +25,13 @@ body {
 	@include pie-clearfix;
 }
 
-// ドラッグとドロップをする場所のスタイル
+.study-title {
+  color: $white;
+  padding: 8px 4px;
+  background-color: $black;
+}
+
+/* ドラッグとドロップをする場所のスタイル */
 .contents {
 	display: table;
 	table-layout: fixed;
@@ -33,7 +39,7 @@ body {
 	.module__space {
 		display: table-cell;
 		width: 50%;
-		height: 100%;
+		height: 50%;
 		padding: 14px;
 		background-color: $gray;
 		.module__inner {
@@ -44,7 +50,7 @@ body {
 	.build__space {
 		display: table-cell;
 		width: 50%;
-		height: 100%;
+		height: 50%;
 		padding: 14px;
 		background-color: lighten($gray, 10%);
 		.build__inner {
@@ -98,3 +104,27 @@ body {
 .ui-sortable-placeholder {
   display: none;
 }
+
+/*validationのスタイル*/
+input.error {
+  color: $red;
+}
+
+
+.form-title {
+  display: block;
+  text-align: center;
+  padding: 28px 0 0 0;
+}
+
+.error-action {
+  li {
+    display: none;
+    color: $red;
+  }
+}
+
+
+
+
+
